@@ -84,11 +84,13 @@
     <Compile Include="EF\ApplicationDbContext.cs" />
     <Compile Include="EF\AppUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\RouteRepository.cs" />
+    <Compile Include="Repositories\StationRepository.cs" />
+    <Compile Include="Repositories\TrainRepository.cs" />
+    <Compile Include="Repositories\VagonRepository.cs" />
+    <Compile Include="Storage\EFUnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Storage\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
