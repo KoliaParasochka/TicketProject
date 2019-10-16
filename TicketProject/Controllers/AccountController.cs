@@ -70,9 +70,9 @@ namespace TicketProject.Controllers
                     {
                         IsPersistent = true
                     }, claim);
-                    if (string.IsNullOrEmpty(returnUrl))
+                   // if (string.IsNullOrEmpty(returnUrl))
                         return RedirectToAction("Index", "Home");
-                    return Redirect(returnUrl);
+                    //return Redirect(returnUrl);
                 }
             }
             return View(model);

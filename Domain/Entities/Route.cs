@@ -11,9 +11,6 @@ namespace Domain.Entities
 
         public Train Train { get; set; }
 
-        public DateTime StartTime { get; set; }
-        public DateTime FinishTime { get; set; }
-
         public Station StartStation { get; set; }
         public Station FinishStation { get; set; }
 
