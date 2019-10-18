@@ -65,6 +65,24 @@ namespace ProjectDb.Repositories
         }
 
         /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        public IEnumerable<MyUser> Find<C>(System.Linq.Expressions.Expression<Func<MyUser, C>> path, Func<MyUser, bool> predicate)
+        {
+            return db.ApplicationUsers.Include(path).Where(predicate).ToList();
+        }
+
+        /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        public IEnumerable<MyUser> Find<C>(System.Linq.Expressions.Expression<Func<MyUser, ICollection<C>>> path, Func<MyUser, bool> predicate)
+        {
+            return db.ApplicationUsers.Include(path).Where(predicate).ToList();
+        }
+
+        /// <summary>
         /// Gets all elements without using include method
         /// </summary>
         /// <returns></returns>

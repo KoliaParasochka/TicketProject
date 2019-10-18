@@ -98,6 +98,18 @@
     <Compile Include="Migrations\201910180647331_DataMig.Designer.cs">
       <DependentUpon>201910180647331_DataMig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910181201464_DataInitDb.cs" />
+    <Compile Include="Migrations\201910181201464_DataInitDb.Designer.cs">
+      <DependentUpon>201910181201464_DataInitDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910181337443_DataInitDb1.cs" />
+    <Compile Include="Migrations\201910181337443_DataInitDb1.Designer.cs">
+      <DependentUpon>201910181337443_DataInitDb1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910181343137_InitDataBase.cs" />
+    <Compile Include="Migrations\201910181343137_InitDataBase.Designer.cs">
+      <DependentUpon>201910181343137_InitDataBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RouteRepository.cs" />
@@ -120,6 +132,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910180647331_DataMig.resx">
       <DependentUpon>201910180647331_DataMig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910181201464_DataInitDb.resx">
+      <DependentUpon>201910181201464_DataInitDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910181337443_DataInitDb1.resx">
+      <DependentUpon>201910181337443_DataInitDb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910181343137_InitDataBase.resx">
+      <DependentUpon>201910181343137_InitDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

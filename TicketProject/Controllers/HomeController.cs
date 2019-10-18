@@ -35,11 +35,12 @@ namespace TicketProject.Controllers
             return View();
         }
 
-        public ActionResult ShowRoute()
+        [HttpGet]
+        public ActionResult ShowRoute(int id)
         {
+            RouteInfo route = routeService.GetRoute(id);
             
-            
-            return View();
+            return View(route);
         }
     }
 }

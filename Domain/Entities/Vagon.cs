@@ -8,6 +8,8 @@ namespace Domain.Entities
         public int Id { get; set; }
         public int Number { get; set; }
         public int Places { get; set; }
+        public int EmptyPlaces { get; set; }
+        public int BusyPaces { get; set; }
         public string Type { get; set; }
 
         public int? TrainId { get; set; }

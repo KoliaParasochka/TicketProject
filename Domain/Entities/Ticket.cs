@@ -3,7 +3,6 @@
     public class Ticket
     {
         public int Id { get; set; }
-        public decimal Price { get; set; }
         public int Place { get; set; }
 
         public int? VagonId { get; set; }

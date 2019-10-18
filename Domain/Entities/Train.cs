@@ -11,8 +11,8 @@ namespace Domain.Entities
         [ForeignKey("Route")]
         public int Id { get; set; }
         public int Number { get; set; }
+        public decimal Price { get; set; }
 
-        
         public virtual Route Route { get; set; }
         public virtual ICollection<Vagon> Vagons { get; set; }
 

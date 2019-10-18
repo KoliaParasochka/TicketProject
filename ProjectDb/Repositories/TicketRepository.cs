@@ -65,6 +65,24 @@ namespace ProjectDb.Repositories
         }
 
         /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        public IEnumerable<Ticket> Find<C>(System.Linq.Expressions.Expression<Func<Ticket, C>> path, Func<Ticket, bool> predicate)
+        {
+            return db.Tickets.Include(path).Where(predicate).ToList();
+        }
+
+        /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        public IEnumerable<Ticket> Find<C>(System.Linq.Expressions.Expression<Func<Ticket, ICollection<C>>> path, Func<Ticket, bool> predicate)
+        {
+            return db.Tickets.Include(path).Where(predicate).ToList();
+        }
+
+        /// <summary>
         /// Gets all elements without using include method
         /// </summary>
         /// <returns></returns>

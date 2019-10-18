@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -114,6 +115,24 @@ namespace ProjectDb.Repositories
                 await db.SaveChangesAsync();
             }
             return false;
+        }
+
+        /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        public IEnumerable<Route> Find<C>(Expression<Func<Route, C>> path, Func<Route, Boolean> predicate)
+        {
+            return db.Routes.Include(path).Where(predicate).ToList();
+        }
+
+        /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        public IEnumerable<Route> Find<C>(Expression<Func<Route, ICollection<C>>> path, Func<Route, Boolean> predicate)
+        {
+            return db.Routes.Include(path).Where(predicate).ToList();
         }
     }
 }

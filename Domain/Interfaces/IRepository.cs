@@ -52,6 +52,18 @@ namespace Domain.Interfaces
         Task<IEnumerable<T>> GetAllAsync<C>(Expression<Func<T, ICollection<C>>> path);
 
         /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        IEnumerable<T> Find<C>(Expression<Func<T, C>> path, Func<T, Boolean> predicate);
+
+        /// <summary>
+        /// Finding all elements 
+        /// </summary>
+        /// <returns>The list of T including path and true with predicate</returns>
+        IEnumerable<T> Find<C>(Expression<Func<T, ICollection<C>>> path, Func<T, Boolean> predicate);
+
+        /// <summary>
         /// Getting item
         /// </summary>
         /// <param name="id">Item id</param>

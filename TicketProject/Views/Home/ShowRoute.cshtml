@@ -1,1 +1,20 @@
-﻿
+﻿@using Domain.Services
+@model RouteInfo
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <h3 class="h-pos">@Model.Stations.First.Value.Name - @Model.Stations.Last.Value.Name</h3>
+    <hr />
+    <div class="info">
+        <span><b>Время отправки: </b>@Model.Stations.First.Value.DepartureTime</span>
+        <span><b>Время прибытия: </b>@Model.Stations.Last.Value.ArrivingTime</span>
+        <span><b>Время в пути: </b>@Model.TravelTime</span>
+        <span><b>Номер поезда: </b>@Model.Train.Number</span>
+        <span><b>Цена билета: </b>@Model.Train.Price</span>
+        <span><b>Количество свободных мест на поезде: </b>@Model.EmptyPlaces</span>
+    </div>
+    
+</div>

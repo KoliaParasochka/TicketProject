@@ -70,27 +70,27 @@ namespace ProjectDb.Migrations
             context.Stations.AddRange(new List<Station> { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 });
             context.SaveChanges();
 
-            Route r1 = new Route { Name = "Запорожье-Харьков", Stations = new LinkedList<Station>() };
+            Route r1 = new Route { Stations = new LinkedList<Station>() };
             r1.Stations.AddLast(s2);
             r1.Stations.AddLast(s4);
             r1.Stations.AddLast(s3);
             r1.Stations.AddLast(s1);
-            Route r2 = new Route { Name = "Херсон-Хмельницкий", Stations = new LinkedList<Station>() };
+            Route r2 = new Route { Stations = new LinkedList<Station>() };
             r2.Stations.AddLast(s7);
             r2.Stations.AddLast(s6);
             r2.Stations.AddLast(s8);
 
-            Route r3 = new Route { Name = "Одесса-Львов", Stations = new LinkedList<Station>() };
+            Route r3 = new Route { Stations = new LinkedList<Station>() };
             r3.Stations.AddLast(s5);
             r3.Stations.AddLast(s9);
             r3.Stations.AddLast(s10);
 
-            context.Routes.AddRange(new List<Route> { r1, r2 ,r3 });
+            context.Routes.AddRange(new List<Route> { r1, r2, r3 });
             context.SaveChanges();
 
-            Train t1 = new Train { Id = r1.Id, Number = 231, Route = r1 };
-            Train t2 = new Train { Id = r2.Id, Number = 501, Route = r2 };
-            Train t3 = new Train { Id = r3.Id, Number = 873, Route = r3 };
+            Train t1 = new Train { Id = r1.Id, Number = 231, Price = 120m, Route = r1 };
+            Train t2 = new Train { Id = r2.Id, Number = 501, Price = 90m, Route = r2 };
+            Train t3 = new Train { Id = r3.Id, Number = 873, Price = 115m, Route = r3 };
 
             context.Trains.AddRange(new List<Train> { t1, t2, t3 });
             context.SaveChanges();
