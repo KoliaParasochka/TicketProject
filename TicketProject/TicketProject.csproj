@@ -164,6 +164,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\IdentityDb.mdf" />
+    <Content Include="App_Data\IdentityDb_log.ldf">
+      <DependentUpon>IdentityDb.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -173,6 +177,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Backgrounds\bridgeTrain.jpg" />
+    <Content Include="Images\Backgrounds\SeaTrain.jpg" />
+    <Content Include="Images\Backgrounds\Vagons.jpg" />
+    <Content Include="Images\Icons\menu.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -241,9 +249,9 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LoginPratial.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Home\ShowRoute.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -9,5 +9,7 @@ namespace Domain.Interfaces
         IRepository<Station> Stations { get; }
         IRepository<Train> Trains { get; }
         IRepository<Vagon> Vagons { get; }
+        IRepository<Ticket> Tickets { get; }
+        IRepository<MyUser> Users { get; }
     }
 }

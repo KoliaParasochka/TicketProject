@@ -8,11 +8,21 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Models;
 using System.Web;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Domain.Interfaces;
+using ProjectDb.Storage;
 
 namespace TicketProject.Controllers
 {
     public class AccountController : Controller
     {
+        private EFUnitOfWork repository;
+
+        public AccountController()
+        {
+            repository = new EFUnitOfWork();
+        }
+
         /// <summary>
         /// This property was created to manage registration
         /// </summary>
@@ -57,7 +67,7 @@ namespace TicketProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = await UserManager.FindAsync(model.Email, model.Password);
                 if(user == null)
                 {
                     ModelState.AddModelError("", "Неверный пароль или логин");
@@ -70,9 +80,9 @@ namespace TicketProject.Controllers
                     {
                         IsPersistent = true
                     }, claim);
-                   // if (string.IsNullOrEmpty(returnUrl))
+                    if (string.IsNullOrEmpty(returnUrl))
                         return RedirectToAction("Index", "Home");
-                    //return Redirect(returnUrl);
+                    return Redirect(returnUrl);
                 }
             }
             return View(model);
@@ -108,8 +118,10 @@ namespace TicketProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Email = model.Email, UserName = model.Email, LastName = model.LastName, Name = model.Name };
+                var user = new ApplicationUser { Email = model.Email, UserName = model.Email,
+                    Name = model.Name, LastName = model.LastName };
                 IdentityResult identityResult = await UserManager.CreateAsync(user, model.Password);
+                await repository.Users.CreateAsync(new MyUser { Email = model.Email });
                 if (identityResult.Succeeded)
                 {
                     return RedirectToAction("Login", "Account");

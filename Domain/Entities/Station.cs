@@ -10,6 +10,7 @@ namespace Domain.Entities
         public DateTime ArrivingTime { get; set; }
         public DateTime DepartureTime { get; set; }
 
+        public int? RouteId { get; set; }
         public Route Route { get; set; }
     }
 }

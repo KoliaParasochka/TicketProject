@@ -14,12 +14,14 @@ namespace ProjectDb.EF
     /// The objects of this class give access to database
     /// </summary>
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Station> Stations { get; set; }    // The list of stations.
         public DbSet<Route> Routes { get; set; }        // The list of routes.
         public DbSet<Train> Trains { get; set; }        // The list of trains.
         public DbSet<Vagon> Vagons { get; set; }        // The list of vagons.
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<MyUser> ApplicationUsers { get; set; }
 
         /// <summary>
         /// Setting connection string as 'IdentityDb'

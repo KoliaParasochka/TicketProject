@@ -7,18 +7,15 @@ namespace Domain.Entities
     public class Route
     {
         public int Id { get; set; }
-        public string Name { get; set; }
 
-        public Train Train { get; set; }
+        public virtual Train Train { get; set; }
 
-        public Station StartStation { get; set; }
-        public Station FinishStation { get; set; }
-
-        public virtual ICollection<Station> Stations { get; set; }
+        public virtual LinkedList<Station> Stations { get; set; }
 
         public Route ()
         {
-            Stations = new List<Station>();
+            if(Stations == null)
+                Stations = new LinkedList<Station>();
         }
     }
 }

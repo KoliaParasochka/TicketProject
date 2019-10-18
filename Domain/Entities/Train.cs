@@ -12,12 +12,14 @@ namespace Domain.Entities
         public int Id { get; set; }
         public int Number { get; set; }
 
-        public Route Route { get; set; }
+        
+        public virtual Route Route { get; set; }
         public virtual ICollection<Vagon> Vagons { get; set; }
 
         public Train()
         {
-            Vagons = new List<Vagon>();
+            if(Vagons == null)
+                Vagons = new List<Vagon>();
         }
     }
 }

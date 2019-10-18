@@ -20,7 +20,9 @@ namespace ProjectDb.Storage
         private IRepository<Route> routeRepository; 
         private IRepository<Station> stationRepository; 
         private IRepository<Train> trainRepository; 
-        private IRepository<Vagon> vagonRepository; 
+        private IRepository<Vagon> vagonRepository;
+        private IRepository<Ticket> ticketRepository;
+        private IRepository<MyUser> userRepository;
 
         public EFUnitOfWork()
         {
@@ -62,6 +64,32 @@ namespace ProjectDb.Storage
                 if (trainRepository == null)
                     trainRepository = new TrainRepository(db);
                 return trainRepository;
+            }
+        }
+
+        /// <summary>
+        /// Getting the onject of TicketRepository
+        /// </summary>
+        public IRepository<Ticket> Tickets
+        {
+            get
+            {
+                if (ticketRepository == null)
+                    ticketRepository = new TicketRepository(db);
+                return ticketRepository;
+            }
+        }
+
+        /// <summary>
+        /// Getting the onject of MyUserRepository
+        /// </summary>
+        public IRepository<MyUser> Users
+        {
+            get
+            {
+                if (userRepository == null)
+                    userRepository = new UserRepository(db);
+                return userRepository;
             }
         }
 
