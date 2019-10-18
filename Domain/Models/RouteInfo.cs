@@ -12,13 +12,13 @@ namespace Domain.Services
         
         public virtual Train Train { get; set; }
 
-        public virtual LinkedList<Station> Stations { get; set; }
+        public virtual List<Station> Stations { get; set; }
 
         public List<Vagon> Vagons { get; set; }
 
         public RouteInfo()
         {
-            Stations = new LinkedList<Station>();
+            Stations = new List<Station>();
             Vagons = new List<Vagon>();
         }
     }

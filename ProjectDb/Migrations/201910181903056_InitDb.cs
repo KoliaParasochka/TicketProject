@@ -21,7 +21,6 @@ namespace ProjectDb.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Place = c.Int(nullable: false),
                         VagonId = c.Int(),
                         MyUserId = c.Int(),
@@ -39,6 +38,8 @@ namespace ProjectDb.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Number = c.Int(nullable: false),
                         Places = c.Int(nullable: false),
+                        EmptyPlaces = c.Int(nullable: false),
+                        BusyPaces = c.Int(nullable: false),
                         Type = c.String(),
                         TrainId = c.Int(),
                     })
@@ -52,6 +53,7 @@ namespace ProjectDb.Migrations
                     {
                         Id = c.Int(nullable: false),
                         Number = c.Int(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Routes", t => t.Id)
@@ -62,15 +64,8 @@ namespace ProjectDb.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        FinishStation_Id = c.Int(),
-                        StartStation_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Stations", t => t.FinishStation_Id)
-                .ForeignKey("dbo.Stations", t => t.StartStation_Id)
-                .Index(t => t.FinishStation_Id)
-                .Index(t => t.StartStation_Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Stations",
@@ -81,13 +76,10 @@ namespace ProjectDb.Migrations
                         ArrivingTime = c.DateTime(nullable: false),
                         DepartureTime = c.DateTime(nullable: false),
                         RouteId = c.Int(),
-                        Route_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Routes", t => t.RouteId)
-                .ForeignKey("dbo.Routes", t => t.Route_Id)
-                .Index(t => t.RouteId)
-                .Index(t => t.Route_Id);
+                .Index(t => t.RouteId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -170,9 +162,6 @@ namespace ProjectDb.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Vagons", "TrainId", "dbo.Trains");
             DropForeignKey("dbo.Trains", "Id", "dbo.Routes");
-            DropForeignKey("dbo.Stations", "Route_Id", "dbo.Routes");
-            DropForeignKey("dbo.Routes", "StartStation_Id", "dbo.Stations");
-            DropForeignKey("dbo.Routes", "FinishStation_Id", "dbo.Stations");
             DropForeignKey("dbo.Stations", "RouteId", "dbo.Routes");
             DropForeignKey("dbo.Tickets", "VagonId", "dbo.Vagons");
             DropForeignKey("dbo.Tickets", "MyUserId", "dbo.MyUsers");
@@ -182,10 +171,7 @@ namespace ProjectDb.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Stations", new[] { "Route_Id" });
             DropIndex("dbo.Stations", new[] { "RouteId" });
-            DropIndex("dbo.Routes", new[] { "StartStation_Id" });
-            DropIndex("dbo.Routes", new[] { "FinishStation_Id" });
             DropIndex("dbo.Trains", new[] { "Id" });
             DropIndex("dbo.Vagons", new[] { "TrainId" });
             DropIndex("dbo.Tickets", new[] { "MyUserId" });

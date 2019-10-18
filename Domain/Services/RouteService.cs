@@ -39,7 +39,8 @@ namespace Domain.Services
                 Id = routeStations.Id,
                 Stations = routeStations.Stations,
                 Train = routeTrain.Train,
-                TravelTime = GetTravelTime(routeTrain.Stations.First.Value.DepartureTime, routeTrain.Stations.Last.Value.ArrivingTime),
+                TravelTime = GetTravelTime(routeTrain.Stations[0].DepartureTime, 
+                    routeTrain.Stations[routeTrain.Stations.Count - 1].ArrivingTime),
                 Vagons = GetVagons(routeTrain.Train.Id)
             };
             result.EmptyPlaces = 0;
@@ -76,11 +77,11 @@ namespace Domain.Services
                 resultList.Add(new RouteViewModel
                 {
                     Id = el.Id,
-                    StartStation = el.Stations.First.Value.Name,
-                    StartDate = el.Stations.First.Value.DepartureTime,
-                    FinishDate = el.Stations.Last.Value.ArrivingTime,
-                    FinishStation = el.Stations.Last.Value.Name,
-                    TravelTime = GetTravelTime(el.Stations.First.Value.DepartureTime, el.Stations.Last.Value.ArrivingTime)
+                    StartStation = el.Stations[0].Name,
+                    StartDate = el.Stations[0].DepartureTime,
+                    FinishDate = el.Stations[el.Stations.Count - 1].ArrivingTime,
+                    FinishStation = el.Stations[el.Stations.Count - 1].Name,
+                    TravelTime = GetTravelTime(el.Stations[0].DepartureTime, el.Stations[el.Stations.Count - 1].ArrivingTime)
                 });
             }
             List<Route> routesAndTrains = (List<Route>)await repository.Routes.GetAllAsync(el => el.Train);

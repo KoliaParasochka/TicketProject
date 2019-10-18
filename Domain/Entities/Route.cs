@@ -10,12 +10,11 @@ namespace Domain.Entities
 
         public virtual Train Train { get; set; }
 
-        public virtual LinkedList<Station> Stations { get; set; }
+        public virtual List<Station> Stations { get; set; }
 
         public Route ()
         {
-            if(Stations == null)
-                Stations = new LinkedList<Station>();
+            Stations = new List<Station>();
         }
     }
 }

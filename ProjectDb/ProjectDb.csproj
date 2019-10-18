@@ -82,33 +82,9 @@
   <ItemGroup>
     <Compile Include="EF\ApplicationDbContext.cs" />
     <Compile Include="EF\AppUserManager.cs" />
-    <Compile Include="Migrations\201910171222289_InitDb.cs" />
-    <Compile Include="Migrations\201910171222289_InitDb.Designer.cs">
-      <DependentUpon>201910171222289_InitDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910171423299_InitDB1.cs" />
-    <Compile Include="Migrations\201910171423299_InitDB1.Designer.cs">
-      <DependentUpon>201910171423299_InitDB1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910171500131_DataMigration.cs" />
-    <Compile Include="Migrations\201910171500131_DataMigration.Designer.cs">
-      <DependentUpon>201910171500131_DataMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910180647331_DataMig.cs" />
-    <Compile Include="Migrations\201910180647331_DataMig.Designer.cs">
-      <DependentUpon>201910180647331_DataMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910181201464_DataInitDb.cs" />
-    <Compile Include="Migrations\201910181201464_DataInitDb.Designer.cs">
-      <DependentUpon>201910181201464_DataInitDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910181337443_DataInitDb1.cs" />
-    <Compile Include="Migrations\201910181337443_DataInitDb1.Designer.cs">
-      <DependentUpon>201910181337443_DataInitDb1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910181343137_InitDataBase.cs" />
-    <Compile Include="Migrations\201910181343137_InitDataBase.Designer.cs">
-      <DependentUpon>201910181343137_InitDataBase.cs</DependentUpon>
+    <Compile Include="Migrations\201910181903056_InitDb.cs" />
+    <Compile Include="Migrations\201910181903056_InitDb.Designer.cs">
+      <DependentUpon>201910181903056_InitDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,29 +97,6 @@
     <Compile Include="Storage\EFUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910171222289_InitDb.resx">
-      <DependentUpon>201910171222289_InitDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910171423299_InitDB1.resx">
-      <DependentUpon>201910171423299_InitDB1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910171500131_DataMigration.resx">
-      <DependentUpon>201910171500131_DataMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910180647331_DataMig.resx">
-      <DependentUpon>201910180647331_DataMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910181201464_DataInitDb.resx">
-      <DependentUpon>201910181201464_DataInitDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910181337443_DataInitDb1.resx">
-      <DependentUpon>201910181337443_DataInitDb1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910181343137_InitDataBase.resx">
-      <DependentUpon>201910181343137_InitDataBase.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -152,6 +105,11 @@
       <Project>{512301EC-97E1-424F-8BCB-3113AF0BBAA1}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201910181903056_InitDb.resx">
+      <DependentUpon>201910181903056_InitDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

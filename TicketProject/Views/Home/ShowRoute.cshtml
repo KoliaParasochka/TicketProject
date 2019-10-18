@@ -6,15 +6,36 @@
 }
 
 <div class="container">
-    <h3 class="h-pos">@Model.Stations.First.Value.Name - @Model.Stations.Last.Value.Name</h3>
+    <br />
+    <h3 class="h-pos">@Model.Stations[0].Name - @Model.Stations[Model.Stations.Count - 1].Name</h3>
     <hr />
     <div class="info">
-        <span><b>Время отправки: </b>@Model.Stations.First.Value.DepartureTime</span>
-        <span><b>Время прибытия: </b>@Model.Stations.Last.Value.ArrivingTime</span>
+        <span><b>Время отправки: </b>@Model.Stations[0].DepartureTime</span>
+        <span><b>Время прибытия: </b>@Model.Stations[Model.Stations.Count - 1].ArrivingTime</span>
         <span><b>Время в пути: </b>@Model.TravelTime</span>
         <span><b>Номер поезда: </b>@Model.Train.Number</span>
-        <span><b>Цена билета: </b>@Model.Train.Price</span>
+        <span><b>Цена билета: </b>@Model.Train.Price грн.</span>
         <span><b>Количество свободных мест на поезде: </b>@Model.EmptyPlaces</span>
     </div>
-    
+    <h4 class="h-pos">Список станций</h4>
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr class="input-text">
+                <th scope="col">Станция</th>
+                <th scope="col">Дата прибытия</th>
+                <th scope="col">Дата отъезда</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model.Stations)
+            {
+                <tr class="input-text">
+                    <td>@el.Name</td>
+                    <td>@el.ArrivingTime</td>
+                    <td>@el.DepartureTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Home/ShowRoute/" class="btn btn-success">Купить билет</a>
 </div>

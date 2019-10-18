@@ -47,7 +47,7 @@ footer {
 .wrapper {
     float: left;
     width: 100%;
-    min-height: 90%;
+    min-height: 92%;
 }
 
 .footer-text {
@@ -74,4 +74,31 @@ footer {
 
 .h-pos {
     text-align: center;
+    clear: both;
+}
+
+.info span {
+    float: left;
+    clear: both;
+
+}
+
+.carousel-caption {
+    color: beige;
+    text-shadow: 1px 1px 2px black;
+}
+
+
+.input-text td, .input-text th {
+    width: 400px;
+}
+
+.logo {
+    color: whitesmoke;
+    font-weight: 600;
+}
+
+.txt-center {
+    top: 30%;
+    position: absolute;
 }
