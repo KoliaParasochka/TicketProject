@@ -39,6 +39,12 @@ namespace TicketProject.Controllers
         public ActionResult ShowRoute(int id)
         {
             RouteInfo route = routeService.GetRoute(id);
+            return View(route);
+        }
+
+        [HttpPost]
+        public ActionResult BuyTicket(RouteInfo route)
+        {
             
             return View(route);
         }
