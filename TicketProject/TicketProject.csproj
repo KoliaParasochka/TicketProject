@@ -179,6 +179,7 @@
     <Content Include="Images\Backgrounds\SeaTrain.jpg" />
     <Content Include="Images\Backgrounds\Vagons.jpg" />
     <Content Include="Images\Icons\menu.png" />
+    <Content Include="Images\Photos\smile-anrgy.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

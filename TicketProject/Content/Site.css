@@ -118,6 +118,57 @@ footer {
     width: 100%;
 }
 
+.panel-search {
+    float: left;
+    width: 100%;
+    padding: 5px;
+    background-color: #202631;
+}
+
+
+
+.panel-search input[type='text'] {
+    border-radius: 3px;
+    border: none;
+    padding: 7px;
+}
+
+
+.img-smile {
+    max-width: 40%;
+    max-height: 40%;
+    float: left;
+    margin-left: 30%;
+    clear: both;
+}
+
+.img-smile img{
+    width: 100%;
+    height: 100%;
+}
+
+@media(min-width: 768px) {
+    .panel-search form {
+        float: right;
+        margin-right: 30px;
+    }
+}
+
+@media(max-width: 768px) {
+    .panel-search form {
+        margin: auto;
+    }
+
+    .panel-search input {
+        border-radius: 3px;
+        border: none;
+        padding: 7px;
+        float: left;
+        clear: both;
+        margin-top: 5px;
+    }
+}
+
 @media(min-width: 1650px) {
     .carousel, .carousel-item, .carousel-item img {
         width: 100%;

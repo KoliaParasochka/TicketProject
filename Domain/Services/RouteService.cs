@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public class RouteService : IRouteFactory
+    public class RouteService : IRouteFactory, IRouteService
     {
         IUnitOfWork repository;
 
@@ -23,6 +23,18 @@ namespace Domain.Services
             {
                 throw new NotImplementedException();
             }
+        }
+
+        /// <summary>
+        /// Updating information about places
+        /// </summary>
+        /// <param name="vagon"></param>
+        /// <returns>vagon</returns>
+        public Vagon UpdateVagon(Vagon vagon)
+        {
+            vagon.BusyPaces = vagon.Tickets.Count;
+            vagon.EmptyPlaces = vagon.Places - vagon.BusyPaces;
+            return vagon;
         }
 
         /// <summary>
@@ -77,6 +89,7 @@ namespace Domain.Services
                 resultList.Add(new RouteViewModel
                 {
                     Id = el.Id,
+                    Stations = el.Stations,
                     StartStation = el.Stations[0].Name,
                     StartDate = el.Stations[0].DepartureTime,
                     FinishDate = el.Stations[el.Stations.Count - 1].ArrivingTime,
@@ -105,5 +118,22 @@ namespace Domain.Services
             else
                 return t1 - t2;
         }
+
+        /// <summary>
+        /// Searching routes
+        /// </summary>
+        /// <param name="s1">the first station</param>
+        /// <param name="s2">the last station</param>
+        /// <returns>The list of Routes which inlsudes s1 and s2.</returns>
+        public async Task<IEnumerable<RouteViewModel>> Search(List<RouteViewModel> list, string s1, string s2)
+        {
+            List<RouteViewModel> result = await GetRoutes();
+            var selected = from el in result
+                           where el.Stations.Find(s => s.Name == s1) != null
+                            && el.Stations.Find(s => s.Name == s2) != null
+                           select el;
+            return selected;
+        }
+
     }
 }

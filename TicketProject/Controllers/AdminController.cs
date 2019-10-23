@@ -19,12 +19,14 @@ namespace TicketProject.Controllers
     public class AdminController : Controller
     {
         private readonly TicketService ticketService;
+        private readonly RouteService routeService;
         private readonly IUnitOfWork repository;
 
         public AdminController()
         {
             repository = new EFUnitOfWork();
             ticketService = new TicketService(repository);
+            routeService = new RouteService(repository);
         }
 
         // GET: Admin
@@ -56,9 +58,12 @@ namespace TicketProject.Controllers
                 RouteName = ticket.RouteName,
                 Email = chosenTicket.UserEmail
             };
-            vagon.Tickets.Add(item);
-            if (vagon.Places <= vagon.Tickets.Count)
+            
+            
+            if (vagon.Places >= vagon.Tickets.Count)
             {
+                vagon.Tickets.Add(item);
+                vagon = routeService.UpdateVagon(vagon);
                 await repository.Vagons.UpdateAsync(vagon);
                 
             }

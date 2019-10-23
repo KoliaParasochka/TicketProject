@@ -61,6 +61,7 @@
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IRouteFactory.cs" />
+    <Compile Include="Interfaces\IRouteService.cs" />
     <Compile Include="Interfaces\ITicketFactory.cs" />
     <Compile Include="Interfaces\ITicketRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />

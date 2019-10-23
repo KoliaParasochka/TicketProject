@@ -25,6 +25,11 @@ namespace Domain.Services
             }
         }
 
+
+        /// <summary>
+        /// Getting tickets which was bought.
+        /// </summary>
+        /// <returns>The list of bought tickets</returns>
         public async Task<IEnumerable<BuyTicketViewModel>> GetListBoughtTickets()
         {
             var list = await repository.ChosenTickets.GetAllAsync();

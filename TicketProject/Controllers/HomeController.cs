@@ -10,6 +10,9 @@ using System.Web.Mvc;
 
 namespace TicketProject.Controllers
 {
+    /// <summary>
+    /// This is a main controller
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly EFUnitOfWork repository;
@@ -21,13 +24,20 @@ namespace TicketProject.Controllers
             routeService = new RouteService(repository);
         }
 
-
+        /// <summary>
+        /// Action for Main gape
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            ViewBag.Routes = await routeService.GetRoutes();
-            return View();
+            var list = await routeService.GetRoutes();
+            return View(list);
         }
 
+        /// <summary>
+        /// Action for about page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -35,6 +45,11 @@ namespace TicketProject.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Show us all routes
+        /// </summary>
+        /// <param name="id">route id</param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ShowRoute(int id)
         {
@@ -42,6 +57,12 @@ namespace TicketProject.Controllers
             return View(route);
         }
 
-        
+        [HttpPost]
+        public async Task<ActionResult> Index(string firstStation, string finishStation)
+        {
+            var routes = await routeService.GetRoutes();
+            var list = await routeService.Search(routes, firstStation, finishStation);
+            return View(list);
+        }
     }
 }

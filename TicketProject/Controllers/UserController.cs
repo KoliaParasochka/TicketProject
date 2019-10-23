@@ -37,7 +37,8 @@ namespace TicketProject.Controllers
         {
             RouteInfo model = routeService.GetRoute(routeId);
             ChosenTicket chosenTicket = new ChosenTicket {
-                VagonId = vagonId, RouteId = model.Id,
+                VagonId = vagonId,
+                RouteId = model.Id,
                 TrainId = model.Train.Id,
                 UserEmail = User.Identity.Name
             };
