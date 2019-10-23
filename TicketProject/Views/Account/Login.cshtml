@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Войти";
 }
-<div class="container">
+<div class="container mt-2">
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         @Html.AntiForgeryToken()

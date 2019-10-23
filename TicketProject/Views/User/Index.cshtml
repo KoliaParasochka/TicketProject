@@ -1,0 +1,38 @@
+﻿@using Domain.Entities
+@model IEnumerable<Ticket>
+@{ 
+    ViewBag.Title = "Личный кабинет";
+}
+
+<div class="container">
+    @if (Model.Any())
+    {
+        foreach (var el in Model)
+        {
+            <div class="ticket">
+                <table>
+                    <thead>
+                        <tr class="">
+                            <th scope="col">Номер поезда</th>
+                            <th scope="col">Номер вагона</th>
+                            <th scope="col">Тип вагона</th>
+                            <th scope="col">Маршрут</th>
+                            <th scope="col">Место</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@el.TrainNumber</td>
+                            <td>@el.VagonNumber</td>
+                            <td>@el.VagonType</td>
+                            <td>@el.RouteName</td>
+                            <td>@el.Place</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+
+    }
+
+</div>

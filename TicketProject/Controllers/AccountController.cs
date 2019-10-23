@@ -92,7 +92,7 @@ namespace TicketProject.Controllers
         /// Using to exit from account
         /// </summary>
         /// <returns></returns>
-        public ActionResult Logout()
+        public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Login", "Account");
@@ -118,8 +118,12 @@ namespace TicketProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Email = model.Email, UserName = model.Email,
-                    Name = model.Name, LastName = model.LastName };
+                var user = new ApplicationUser {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        Name = model.Name,
+                        LastName = model.LastName
+                     };
                 IdentityResult identityResult = await UserManager.CreateAsync(user, model.Password);
                 await repository.Users.CreateAsync(new MyUser { Email = model.Email });
                 if (identityResult.Succeeded)
@@ -130,10 +134,18 @@ namespace TicketProject.Controllers
             return View(model);
         }
 
-        // GET: Account
+
+        /// <summary>
+        /// Checking the role of user.
+        /// </summary>
+        /// <returns>If it is admin return admin's page. Else user's</returns>
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole("admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return RedirectToAction("Index", "User");
         }
     }
 }

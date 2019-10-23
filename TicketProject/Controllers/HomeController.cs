@@ -42,11 +42,6 @@ namespace TicketProject.Controllers
             return View(route);
         }
 
-        [HttpPost]
-        public ActionResult BuyTicket(RouteInfo route)
-        {
-            
-            return View(route);
-        }
+        
     }
 }

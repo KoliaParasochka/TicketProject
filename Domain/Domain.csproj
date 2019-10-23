@@ -56,22 +56,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ChosenTicket.cs" />
     <Compile Include="Entities\MyUser.cs" />
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IRouteFactory.cs" />
+    <Compile Include="Interfaces\ITicketFactory.cs" />
+    <Compile Include="Interfaces\ITicketRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Route.cs" />
     <Compile Include="Entities\Station.cs" />
     <Compile Include="Entities\Train.cs" />
     <Compile Include="Entities\Vagon.cs" />
+    <Compile Include="Models\BuyTicketViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RouteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\RouteInfo.cs" />
     <Compile Include="Services\RouteService.cs" />
+    <Compile Include="Services\TicketService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

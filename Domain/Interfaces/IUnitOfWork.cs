@@ -11,5 +11,6 @@ namespace Domain.Interfaces
         IRepository<Vagon> Vagons { get; }
         IRepository<Ticket> Tickets { get; }
         IRepository<MyUser> Users { get; }
+        IRepository<ChosenTicket> ChosenTickets { get; }
     }
 }

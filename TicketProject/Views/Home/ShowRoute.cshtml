@@ -37,5 +37,44 @@
             }
         </tbody>
     </table>
-    <a href="/Home/ShowRoute/" class="btn btn-success">Купить билет</a>
+    <h4 class="h-pos">Список вагонов</h4>
+    @using (Html.BeginForm("BuyTicket", "User", FormMethod.Post))
+    {
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr class="input-text">
+                    <th scope="col">Номер</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Всего мест</th>
+                    <th scope="col">Свободных мест</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var el in Model.Vagons)
+                {
+                    <tr class="input-text">
+                        <td>@el.Number</td>
+                        <td>@el.Type</td>
+                        <td>@el.Places</td>
+                        <td>@el.EmptyPlaces</td>
+                        <td>
+                            <input type="hidden" value="@el.Id" name="vagonId" />
+                            <input type="hidden" value="@Model.Id" name="routeId" />
+                            @if (el.EmptyPlaces == 0)
+                            {
+                                <input type="submit" value="Купить билет" class="btn btn-success" disabled/>
+                            }
+                            else
+                            {
+                                <input type="submit" value="Купить билет" class="btn btn-success" />
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    
 </div>

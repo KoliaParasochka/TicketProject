@@ -86,8 +86,17 @@
     <Compile Include="Migrations\201910181903056_InitDb.Designer.cs">
       <DependentUpon>201910181903056_InitDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910210643116_DataMogration.cs" />
+    <Compile Include="Migrations\201910210643116_DataMogration.Designer.cs">
+      <DependentUpon>201910210643116_DataMogration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910221513137_DbMig.cs" />
+    <Compile Include="Migrations\201910221513137_DbMig.Designer.cs">
+      <DependentUpon>201910221513137_DbMig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BuyTicket.cs" />
     <Compile Include="Repositories\RouteRepository.cs" />
     <Compile Include="Repositories\StationRepository.cs" />
     <Compile Include="Repositories\TicketRepository.cs" />
@@ -109,6 +118,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910181903056_InitDb.resx">
       <DependentUpon>201910181903056_InitDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910210643116_DataMogration.resx">
+      <DependentUpon>201910210643116_DataMogration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221513137_DbMig.resx">
+      <DependentUpon>201910221513137_DbMig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

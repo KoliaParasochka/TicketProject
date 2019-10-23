@@ -120,7 +120,7 @@ namespace ProjectDb.Repositories
         /// <returns>Element</returns>
         public async Task<MyUser> GetAsync(int id)
         {
-            return await db.ApplicationUsers.FirstOrDefaultAsync();
+            return await db.ApplicationUsers.FindAsync(id);
         }
 
         /// <summary>

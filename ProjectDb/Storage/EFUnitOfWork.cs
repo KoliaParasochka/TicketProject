@@ -23,6 +23,7 @@ namespace ProjectDb.Storage
         private IRepository<Vagon> vagonRepository;
         private IRepository<Ticket> ticketRepository;
         private IRepository<MyUser> userRepository;
+        private IRepository<ChosenTicket> chosenticketRepository;
 
         public EFUnitOfWork()
         {
@@ -103,6 +104,19 @@ namespace ProjectDb.Storage
                 if (vagonRepository == null)
                     vagonRepository = new VagonRepository(db);
                 return vagonRepository;
+            }
+        }
+
+        /// <summary>
+        /// Getting the onject of BuyTicketRepository
+        /// </summary>
+        public IRepository<ChosenTicket> ChosenTickets
+        {
+            get
+            {
+                if (chosenticketRepository == null)
+                    chosenticketRepository = new BuyTicket(db);
+                return chosenticketRepository;
             }
         }
 

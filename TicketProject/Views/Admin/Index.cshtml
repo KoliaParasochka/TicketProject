@@ -1,0 +1,40 @@
+﻿@using Domain.Models
+@model IEnumerable<BuyTicketViewModel>
+@{ 
+    ViewBag.Title = "Администратор";
+}
+
+<div class="mt-2 container">
+    @if (Model.Any())
+    {
+        <h3 class="h-pos">Список покупателей</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr class="">
+                    <th scope="col">Номер поезда</th>
+                    <th scope="col">Номер вагона</th>
+                    <th scope="col">Тип вагона</th>
+                    <th scope="col">Почта покупателя</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var el in Model)
+                {
+                    <tr class="">
+                        <td>@el.TrainNumber</td>
+                        <td>@el.VagonNumber</td>
+                        <td>@el.VagonType</td>
+                        <td>@el.Email</td>
+                        <td>
+                            <a href="/Admin/Disagree/@el.ChosenTicketId">Удалить</a>
+                            <a href="/Admin/Agree/@el.ChosenTicketId">Подтвердить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+
+</div>

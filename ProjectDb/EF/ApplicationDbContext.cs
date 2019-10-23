@@ -22,6 +22,7 @@ namespace ProjectDb.EF
         public DbSet<Vagon> Vagons { get; set; }        // The list of vagons.
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<MyUser> ApplicationUsers { get; set; }
+        public DbSet<ChosenTicket> ChosenTickets { get; set; }
 
         /// <summary>
         /// Setting connection string as 'IdentityDb'

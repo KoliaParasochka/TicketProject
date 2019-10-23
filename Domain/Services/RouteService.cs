@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public class RouteService
+    public class RouteService : IRouteFactory
     {
         IUnitOfWork repository;
 

@@ -116,7 +116,7 @@ namespace ProjectDb.Repositories
         /// <returns>Element</returns>
         public async Task<Station> GetAsync(int id)
         {
-            return await db.Stations.FirstOrDefaultAsync();
+            return await db.Stations.FindAsync(id);
         }
 
         /// <summary>

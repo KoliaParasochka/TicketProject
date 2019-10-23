@@ -99,7 +99,7 @@ namespace ProjectDb.Repositories
         /// <returns>Element</returns>
         public async Task<Route> GetAsync(int id)
         {
-            return await db.Routes.FirstOrDefaultAsync();
+            return await db.Routes.FindAsync(id);
         }
 
         /// <summary>
