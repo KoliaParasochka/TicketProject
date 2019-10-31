@@ -37,6 +37,222 @@ namespace TicketProject.Controllers
             return View(Tickets);
         }
 
+        /// <summary>
+        /// Changing route
+        /// </summary>
+        /// <param name="id">route id</param>
+        /// <returns>View</returns>
+        public ActionResult Change(int id, string message)
+        {
+            RouteModel model = routeService.GetModel(id);
+            ViewBag.Message = message;
+            return View(model);
+        }
+
+        /// <summary>
+        /// Removing station
+        /// </summary>
+        /// <param name="idS">station id</param>
+        /// <param name="idR">route id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> DeleteStation(int idS, int idR)
+        {
+            await repository.Stations.DeleteAsync(idS);
+            return RedirectToAction("Change", new { id = idR });
+        }
+
+        /// <summary>
+        /// Getting station from database
+        /// </summary>
+        /// <param name="idS">station id</param>
+        /// <param name="idR">route id</param>
+        /// <returns>View</returns>
+        [HttpGet]
+        public async Task<ActionResult> ChangeStation(int idS, int idR)
+        {
+            Station station = await repository.Stations.GetAsync(idS);
+            ViewBag.idR = idR;
+            return View(station);
+        }
+
+        /// <summary>
+        /// Putting updated station into database
+        /// </summary>
+        /// <param name="idS">station id</param>
+        /// <param name="idR">route id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> ChangeStation(Station model, int idR)
+        {
+            model.RouteId = idR;
+            if (ModelState.IsValid)
+            {
+                await repository.Stations.UpdateAsync(model);
+                return RedirectToAction("Change", new { id = idR });
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Adding new Station to route
+        /// </summary>
+        /// <param name="idR">route id</param>
+        /// <returns>View</returns>
+        [HttpGet]
+        public ActionResult AddStation(int idR)
+        {
+            ViewBag.idR = idR;
+            return View();
+        }
+
+        /// <summary>
+        /// Adding new Station to route
+        /// </summary>
+        /// <param name="idR">route id</param>
+        /// <returns>View</returns>
+        [HttpPost]
+        public async Task<ActionResult> AddStation(Station model, int idR)
+        {
+            model.RouteId = idR;
+            if (ModelState.IsValid)
+            {
+                await repository.Stations.CreateAsync(model);
+                return RedirectToAction("Change", new { id = idR });
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Getting train from database to change it.
+        /// </summary>
+        /// <param name="idT"></param>
+        /// <param name="idR"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ChangeTrain(int idT, int idR)
+        {
+            ViewBag.idR = idR;
+            ViewBag.idT = idT;
+            Train train = repository.Trains.Find(t => t.Vagons, t => t.Id == idT).FirstOrDefault();
+            return View(train);
+        }
+
+        /// <summary>
+        /// Changing train
+        /// </summary>
+        /// <param name="model">train</param>
+        /// <param name="idR">route id</param>
+        /// <returns>Resirection or view (it depents on validating of the data)</returns>
+        [HttpPost]
+        public async Task<ActionResult> ChangeTrain(Train model, int idR)
+        {
+            if (ModelState.IsValid)
+            {
+                await repository.Trains.UpdateAsync(model);
+                return RedirectToAction("Change", new { id = idR });
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Removing vagon
+        /// </summary>
+        /// <param name="idV">vagon id</param>
+        /// <param name="idR">route id</param>
+        /// <returns>Redirection</returns>
+        [HttpPost]
+        public async Task<ActionResult> DeleteVagon(int idV, int idR)
+        {
+            Ticket ticket = repository.Tickets.Find(t => t.Vagon, t => t.VagonId == idV).FirstOrDefault();
+            if (ticket == null)
+            {
+                await repository.Vagons.DeleteAsync(idV);
+                return RedirectToAction("Change", new { id = idR });
+            }
+
+            return RedirectToAction("Change", new { id = idR,
+                message = "Невозможно удалить вагон, на который уже куплены билеты" });
+        }
+
+        /// <summary>
+        /// Adding new vagon, but this mathod takes it from database 
+        /// </summary>
+        /// <param name="idR">route id</param>
+        /// <param name="idT">train id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AddVagon(int idR, int idT)
+        {
+            ViewBag.idR = idR;
+            ViewBag.idT = idT;
+            return View();
+        }
+
+        /// <summary>
+        /// Putting updeted data into database
+        /// </summary>
+        /// <param name="model">updated model</param>
+        /// <param name="idR">route id</param>
+        /// <param name="idT">train id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> AddVagon(Vagon model, int idR, int idT)
+        {
+            model.TrainId = idT;
+            if (ModelState.IsValid)
+            {
+                await repository.Vagons.CreateAsync(model);
+                return RedirectToAction("Change", new { id = idR });
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Taking vagon from database.
+        /// </summary>
+        /// <param name="idV">vagon id</param>
+        /// <param name="idR">route id</param>
+        /// <param name="idT">train id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ChangeVagon(int idV, int idR, int idT)
+        {
+            ViewBag.idR = idR;
+            ViewBag.idV = idV;
+            ViewBag.idT = idT;
+            Vagon vagon = repository.Vagons.Find(v => v.Tickets, v => v.Id == idV).FirstOrDefault();
+            if(vagon.Tickets.Count == 0)
+                return View(vagon);
+            return RedirectToAction("Change", new { id = idR,
+                message = "Невозможно поменять вагон, на который уже куплены билеты!" });
+        }
+
+        /// <summary>
+        /// Putting updated data into database.
+        /// </summary>
+        /// <param name="model">updated vagon</param>
+        /// <param name="idR">route id</param>
+        /// <param name="idT">train id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> ChangeVagon(Vagon model, int idR, int idT)
+        {
+            model.TrainId = idT;
+            if (ModelState.IsValid)
+            {
+                await repository.Vagons.UpdateAsync(model);
+                return RedirectToAction("Change", new { id = idR });
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Creating route
+        /// </summary>
+        /// <param name="trainId"></param>
+        /// <param name="routeId"></param>
+        /// <returns>View</returns>
         public async Task<ActionResult> Create(int? trainId, int? routeId)
         {
             if(routeId != null)
@@ -73,6 +289,12 @@ namespace TicketProject.Controllers
             return View(route);
         }
 
+        /// <summary>
+        /// Creating station for route
+        /// </summary>
+        /// <param name="routeId"></param>
+        /// <param name="trainId"></param>
+        /// <returns>View</returns>
         [HttpGet]
         public ActionResult CreateStation(int routeId, int? trainId)
         {
@@ -81,6 +303,14 @@ namespace TicketProject.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Creating station (getting input data from view)
+        /// </summary>
+        /// <param name="station"></param>
+        /// <param name="idR"></param>
+        /// <param name="idT"></param>
+        /// <returns>View</returns>
         [HttpPost]
         public async Task<ActionResult> CreateStation(Station station, int idR, int? idT)
         {
@@ -88,6 +318,7 @@ namespace TicketProject.Controllers
             {
                 Route route = repository.Routes.Find(r => r.Stations, r => r.Id == idR).FirstOrDefault();
                 route.Stations.Add(station);
+                
                 if (await repository.Routes.UpdateAsync(route))
                     ViewBag.Stations = route.Stations;
                 else
@@ -99,6 +330,13 @@ namespace TicketProject.Controllers
             return View(station);
         }
 
+
+        /// <summary>
+        /// Creating train
+        /// </summary>
+        /// <param name="trainId"></param>
+        /// <param name="routeId"></param>
+        /// <returns>View</returns>
         [HttpGet]
         public ActionResult CreateTrain(int? trainId, int? routeId)
         {
@@ -125,6 +363,12 @@ namespace TicketProject.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Creating train (getting input data from model)
+        /// </summary>
+        /// <param name="train"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> CreateTrain(Train train, int id)
         {
@@ -144,6 +388,12 @@ namespace TicketProject.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Creating vagon
+        /// </summary>
+        /// <param name="idT">train id</param>
+        /// <param name="idR">route id</param>
+        /// <returns>View</returns>
         [HttpGet]
         public ActionResult CreateVagon(int idT, int idR)
         {
@@ -152,6 +402,13 @@ namespace TicketProject.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Creating vagon (getting input data from view)
+        /// </summary>
+        /// <param name="vagon"></param>
+        /// <param name="idT">train id</param>
+        /// <param name="idR">route id</param>
+        /// <returns>View</returns>
         [HttpPost]
         public async Task<ActionResult> CreateVagon(Vagon vagon, int idT, int idR)
         {

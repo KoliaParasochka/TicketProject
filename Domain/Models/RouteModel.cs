@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace Domain.Entities
+namespace Domain.Models
 {
-    public class Route
+    public class RouteModel
     {
         public int Id { get; set; }
 
@@ -12,9 +15,7 @@ namespace Domain.Entities
 
         public virtual List<Station> Stations { get; set; }
 
-        public bool IsRemoved { get; set; }
-
-        public Route ()
+        public RouteModel()
         {
             Stations = new List<Station>();
         }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
-    public class Station : IComparable<Station>
+    public class Station : IComparable<Station>, IValidatableObject
     {
         
         public int Id { get; set; }
@@ -33,6 +34,26 @@ namespace Domain.Entities
         public int CompareTo(Station other)
         {
             return this.ArrivingTime.CompareTo(other.ArrivingTime);
+        }
+
+        /// <summary>
+        /// Checking input data
+        /// </summary>
+        /// <param name="validationContext"></param>
+        /// <returns></returns>
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+            if(this.ArrivingTime > this.DepartureTime)
+            {
+                errors.Add(new ValidationResult("Время отбытия должно быть больше чем время прибытия"));
+            }
+            if (this.ArrivingTime < DateTime.Now || this.DepartureTime < DateTime.Now)
+            {
+                errors.Add(new ValidationResult("Нельзя установить дату ниже нынишней!"));
+            }
+
+            return errors;
         }
     }
 }

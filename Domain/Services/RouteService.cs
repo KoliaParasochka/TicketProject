@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public class RouteService : IRouteFactory, IRouteService
+    public class RouteService : IRouteFactory, IRouteService, IModel<RouteModel>
     {
         IUnitOfWork repository;
 
@@ -135,5 +135,18 @@ namespace Domain.Services
             return selected;
         }
 
+        /// <summary>
+        /// Getting model with all properties.
+        /// </summary>
+        /// <param name="id">model id</param>
+        /// <returns>model</returns>
+        public RouteModel GetModel(int id)
+        {
+            Route routeS = repository.Routes.Find(r => r.Stations, r => r.Id == id).FirstOrDefault();
+            Route routeT = repository.Routes.Find(r => r.Train, r => r.Id == id).FirstOrDefault();
+            Train train = repository.Trains.Find(t => t.Vagons, t => t.Id == routeT.Train.Id).FirstOrDefault();
+            RouteModel model = new RouteModel { Id = routeT.Id, Stations = routeS.Stations, Train = train };
+            return model;
+        }
     }
 }

@@ -1,0 +1,115 @@
+﻿@model Domain.Models.RouteModel
+
+@{ 
+    ViewBag.Title = "Изменить маршрут";
+}
+
+<div class="container mt-2 mb-2">
+    <h4 class="h-pos">Поезд</h4>
+    <span><b>Номер поезда: </b>@Model.Train.Number</span><br />
+    <span><b>Цена билета: </b>@Model.Train.Price</span><br /><br />
+    @using (Html.BeginForm("ChangeTrain", "Admin", FormMethod.Get))
+    {
+        <input type="hidden" value="@Model.Id" name="idR" />
+        <input type="hidden" value="@Model.Train.Id" name="idT" />
+        <input type="submit" value="Изменить поезд" class="btn btn-success" />
+    }
+    <br />
+    <h4 class="h-pos">Список вагонов</h4>
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr class="input-text">
+                <th scope="col">Номер вагона</th>
+                <th scope="col">Тип вагона</th>
+                <th scope="col">Места</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model.Train.Vagons)
+            {
+                <tr class="input-text">
+                    <td>@el.Number</td>
+                    <td>@el.Type</td>
+                    <td>@el.Places</td>
+                    <td>
+                        @if (Model.Train.Vagons.Count > 1)
+                        {
+                            using (Html.BeginForm("DeleteVagon", "Admin", FormMethod.Post, new { @class = "form-t" }))
+                            {
+                                <input type="hidden" value="@Model.Id" name="idR" />
+                                <input type="hidden" value="@el.Id" name="idV" />
+                                <input type="submit" value="Удалить" class="btn btn-link" />
+                            }
+                        }
+                        @using (Html.BeginForm("ChangeVagon", "Admin", FormMethod.Get, new { @class = "form-t" }))
+                        {
+                            <input type="hidden" value="@Model.Id" name="idR" />
+                            <input type="hidden" value="@Model.Train.Id" name="idT" />
+                            <input type="hidden" value="@el.Id" name="idV" />
+                            <input type="submit" value="Изменить" class="btn btn-link" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    @using (Html.BeginForm("AddVagon", "Admin", FormMethod.Get))
+    {
+        <input type="hidden" value="@Model.Id" name="idR" />
+        <input type="hidden" value="@Model.Train.Id" name="idT" />
+        <input type="submit" value="Добавить" class="btn btn-primary" />
+    }
+    <br />
+
+    <h4 class="h-pos">Список станций</h4>
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr class="input-text">
+                <th scope="col">Назнание</th>
+                <th scope="col">Время прибытия</th>
+                <th scope="col">Время выезда</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model.Stations)
+            {
+                <tr class="input-text">
+                    <td>@el.Name</td>
+                    <td>@el.ArrivingTime</td>
+                    <td>@el.DepartureTime</td>
+                    <td>
+                        @if (Model.Stations.Count > 2)
+                        {
+                            using (Html.BeginForm("DeleteStation", "Admin", FormMethod.Post, new { @class = "form-t" }))
+                            {
+                                <input type="hidden" value="@Model.Id" name="idR" />
+                                <input type="hidden" value="@el.Id" name="idS" />
+                                <input type="submit" value="Удалить" class="btn btn-link" />
+                            }
+                        }
+                        @using (Html.BeginForm("ChangeStation", "Admin", FormMethod.Get, new { @class = "form-t" }))
+                        {
+                            <input type="hidden" value="@Model.Id" name="idR" />
+                            <input type="hidden" value="@el.Id" name="idS" />
+                            <input type="submit" value="Изменить" class="btn btn-link" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p class="text-danger">@ViewBag.Message</p>
+
+    <br />
+    @using (Html.BeginForm("AddStation", "Admin", FormMethod.Get))
+    {
+        <input type="hidden" value="@Model.Id" name="idR" />
+        <input type="hidden" value="@Model.Train.Id" name="idT" />
+        <input type="submit" value="Добавить" class="btn btn-primary" />
+    }
+    <br />
+    @Html.ActionLink("Готово", "Index", "Admin", new { area = "" }, new { @class = "btn btn-info" })
+</div>
