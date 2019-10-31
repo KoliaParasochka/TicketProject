@@ -35,6 +35,33 @@
             </tbody>
         </table>
     }
-
-
+    <h3 class="h-pos">Список маршрутов</h3>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Номер поезда</th>
+                    <th>Начальная станция</th>
+                    <th>Конечная станция</th>
+                    <th>Время отъезда</th>
+                    <th>Время прибытия</th>
+                    <th>Время в пути</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var el in ViewBag.Routes)
+                {
+                <tr>
+                    <td>@el.TrainNumber</td>
+                    <td>@el.StartStation</td>
+                    <td>@el.FinishStation</td>
+                    <td>@el.StartDate</td>
+                    <td>@el.FinishDate</td>
+                    <td>@el.TravelTime</td>
+                    <td><a href="/Home/ShowRoute/@el.Id" class="btn btn-info">Изменить</a></td>
+                </tr>
+                }
+            </tbody>
+        </table> 
+        @Html.ActionLink("Добавить", "Create", "Admin", new { area = "" }, new { @class = "btn btn-success" } )
 </div>

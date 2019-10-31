@@ -94,6 +94,14 @@
     <Compile Include="Migrations\201910221513137_DbMig.Designer.cs">
       <DependentUpon>201910221513137_DbMig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910301212319_DataV.cs" />
+    <Compile Include="Migrations\201910301212319_DataV.Designer.cs">
+      <DependentUpon>201910301212319_DataV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910310634432_MigValid.cs" />
+    <Compile Include="Migrations\201910310634432_MigValid.Designer.cs">
+      <DependentUpon>201910310634432_MigValid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BuyTicket.cs" />
@@ -124,6 +132,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910221513137_DbMig.resx">
       <DependentUpon>201910221513137_DbMig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910301212319_DataV.resx">
+      <DependentUpon>201910301212319_DataV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910310634432_MigValid.resx">
+      <DependentUpon>201910310634432_MigValid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

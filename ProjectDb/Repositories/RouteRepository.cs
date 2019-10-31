@@ -113,6 +113,7 @@ namespace ProjectDb.Repositories
             {
                 db.Entry(item).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                return true;
             }
             return false;
         }

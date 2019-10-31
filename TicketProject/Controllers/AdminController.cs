@@ -33,7 +33,139 @@ namespace TicketProject.Controllers
         public async Task<ActionResult> Index()
         {
             var Tickets = await ticketService.GetListBoughtTickets();
+            ViewBag.Routes = await routeService.GetRoutes();
             return View(Tickets);
+        }
+
+        public async Task<ActionResult> Create(int? trainId, int? routeId)
+        {
+            if(routeId != null)
+            {
+                if(trainId != null)
+                {
+                    Train train = repository.Trains.Find(t => t.Vagons, t => t.Id == trainId).FirstOrDefault();
+                    ViewBag.Train = train;
+                }
+                else
+                {
+                    ViewBag.Train = null;
+                    ViewBag.MessageT = "Добавьте поезд!";
+                }
+                Route routeS = repository.Routes.Find(r => r.Stations, r => r.Id == routeId).FirstOrDefault();
+                if (routeS.Stations != null)
+                {
+                    ViewBag.Stations = routeS.Stations;
+                    if(routeS.Stations.Count < 2)
+                        ViewBag.MessageS = "Добавьте минимум две станции!";
+                }
+                else
+                {
+                    ViewBag.Stations = null;
+                    ViewBag.MessageS = "Добавьте минимум две станции!";
+                }
+                    
+                return View(routeS);
+            }
+            Route route = new Route();
+            await repository.Routes.CreateAsync(route);
+            ViewBag.Stations = null;
+            ViewBag.Message = "Добавьте поезд и минимум две станции!";
+            return View(route);
+        }
+
+        [HttpGet]
+        public ActionResult CreateStation(int routeId, int? trainId)
+        {
+            ViewBag.RouteId = routeId;
+            ViewBag.TrainId = trainId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateStation(Station station, int idR, int? idT)
+        {
+            if (ModelState.IsValid)
+            {
+                Route route = repository.Routes.Find(r => r.Stations, r => r.Id == idR).FirstOrDefault();
+                route.Stations.Add(station);
+                if (await repository.Routes.UpdateAsync(route))
+                    ViewBag.Stations = route.Stations;
+                else
+                    ViewBag.Stations = null;
+                ViewBag.RouteId = idR;
+                ViewBag.TrainId = idT;
+                return RedirectToAction("Create", new { trainId = idT, routeId = idR });
+            }
+            return View(station);
+        }
+
+        [HttpGet]
+        public ActionResult CreateTrain(int? trainId, int? routeId)
+        {
+            if(trainId != null)
+            {
+                Train train = repository.Trains.Find(t => t.Vagons, t => t.Id == trainId).FirstOrDefault();
+                ViewBag.Vagons = train.Vagons;
+                ViewBag.Train = train;
+                ViewBag.TrainId = trainId;
+                if(train.Vagons.Count < 1)
+                {
+                    ViewBag.Message = "Добавьте хотя бы один вагон!";
+                }
+            }
+            else
+            {
+                ViewBag.Vagons = null;
+                ViewBag.Train = null;
+                ViewBag.Message = "Добавьте хотя бы один вагон!";
+            }
+            
+
+            ViewBag.RouteId = routeId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateTrain(Train train, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Route route = repository.Routes.Find(r => r.Train, r => r.Id == id).FirstOrDefault();
+                route.Train = train;
+                if (await repository.Routes.UpdateAsync(route))
+                    ViewBag.Train = train;
+                else
+                    ViewBag.Train = null;
+                ViewBag.TrainId = train.Id;
+                ViewBag.RouteId = id;
+                return RedirectToAction("CreateTrain", new { trainId = train.Id, routeId = id });
+            }
+            
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CreateVagon(int idT, int idR)
+        {
+            ViewBag.TrainId = idT;
+            ViewBag.RouteId = idR;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateVagon(Vagon vagon, int idT, int idR)
+        {
+            if (ModelState.IsValid)
+            {
+                Train train = repository.Trains.Find(t => t.Vagons, t => t.Id == idT).FirstOrDefault();
+                train.Vagons.Add(vagon);
+                if (await repository.Trains.UpdateAsync(train))
+                    ViewBag.Vagons = train.Vagons;
+                else
+                    ViewBag.Vagons = null;
+                return RedirectToAction("CreateTrain", new { trainId = idT, routeId = idR });
+            }
+            return View(vagon);
         }
 
         /// <summary>

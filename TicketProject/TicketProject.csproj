@@ -251,6 +251,10 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\BuyTicket.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\CreateTrain.cshtml" />
+    <Content Include="Views\Admin\CreateVagon.cshtml" />
+    <Content Include="Views\Admin\CreateStation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

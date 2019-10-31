@@ -1,0 +1,89 @@
+﻿@model Domain.Entities.Route
+
+<div class="container mt-5">
+    @if (ViewBag.Train != null)
+    {
+        <span><b>Номер поезда: </b>@ViewBag.Train.Number</span><br />
+        <span><b>Цена билета: </b>@ViewBag.Train.Price</span><br />
+        if (ViewBag.Train.Vagons != null)
+        {
+            <h4 class="h-pos">Список вагонов</h4>
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr class="input-text">
+                        <th scope="col">Номер вагона</th>
+                        <th scope="col">Тип вагона</th>
+                        <th scope="col">Места</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var el in ViewBag.Train.Vagons)
+                    {
+                        <tr class="input-text">
+                            <td>@el.Number</td>
+                            <td>@el.Type</td>
+                            <td>@el.Places</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("CreateTrain", "Admin", FormMethod.Get))
+        {
+            <input type="hidden" value="@Model.Id" name="routeId" />
+            <input type="submit" value="Добавить поезд" class="btn btn-success" />
+        }
+    }
+    <br />
+    @if (ViewBag.Stations != null)
+    {
+        <h4 class="h-pos">Список вагонов</h4>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr class="input-text">
+                    <th scope="col">Назнание</th>
+                    <th scope="col">Время прибытия</th>
+                    <th scope="col">Время выезда</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var el in ViewBag.Stations)
+                {
+                    <tr class="input-text">
+                        <td>@el.Name</td>
+                        <td>@el.ArrivingTime</td>
+                        <td>@el.DepartureTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+
+    <br />
+    @using (Html.BeginForm("CreateStation", "Admin", FormMethod.Get))
+    {
+        <input type="hidden" value="@Model.Id" name="routeId" />
+        if (ViewBag.Train != null)
+        {
+            <input type="hidden" value="@ViewBag.Train.Id" name="trainId" />
+        }
+        <input type="submit" value="Добавить станцию" class="btn btn-success" />
+    }
+    <br />
+
+    <p class="text-danger">@ViewBag.Message</p>
+    <p class="text-danger">@ViewBag.MessageS</p>
+    <p class="text-danger">@ViewBag.MessageT</p>
+
+    @if (ViewBag.Train != null && ViewBag.Stations.Count > 1)
+    {
+        @Html.ActionLink("Готово", "Index", "Admin", new { area = "" }, new { @class = "btn btn-info" })
+    }
+
+
+</div>
+
