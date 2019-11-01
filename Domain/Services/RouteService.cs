@@ -42,7 +42,7 @@ namespace Domain.Services
         /// </summary>
         /// <param name="id">route id.</param>
         /// <returns>Object whick includes all information about route.</returns>
-        public RouteInfo GetRoute(int id)
+        public RouteInfo GetRoute(int? id)
         {
             Route routeStations = repository.Routes.Find(r => r.Stations, r => r.Id == id).FirstOrDefault();
             Route routeTrain = repository.Routes.Find(r => r.Train, r => r.Id == id).FirstOrDefault();
@@ -90,6 +90,7 @@ namespace Domain.Services
                 {
                     Id = el.Id,
                     Stations = el.Stations,
+                    IsRemoved = el.IsRemoved,
                     StartStation = el.Stations[0].Name,
                     StartDate = el.Stations[0].DepartureTime,
                     FinishDate = el.Stations[el.Stations.Count - 1].ArrivingTime,

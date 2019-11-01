@@ -46,18 +46,24 @@
                     <th scope="col">Тип</th>
                     <th scope="col">Всего мест</th>
                     <th scope="col">Свободных мест</th>
-                    <th scope="col"></th>
-                </tr>
+                    @if (!User.IsInRole("admin"))
+                    {
+                        <th scope="col"></th>
+                    }
+                    </tr>
             </thead>
             <tbody>
                 @foreach (var el in Model.Vagons)
                 {
-                    <tr class="input-text">
-                        <td>@el.Number</td>
-                        <td>@el.Type</td>
-                        <td>@el.Places</td>
-                        <td>@el.EmptyPlaces</td>
+                <tr class="input-text">
+                    <td>@el.Number</td>
+                    <td>@el.Type</td>
+                    <td>@el.Places</td>
+                    <td>@el.EmptyPlaces</td>
+                    @if (!User.IsInRole("admin"))
+                    {
                         <td>
+
                             @using (Html.BeginForm("BuyTicket", "User", FormMethod.Post))
                             {
                                 <input type="hidden" value="@Model.Id" name="routeId" />
@@ -71,7 +77,9 @@
                                     <input type="submit" value="Купить билет" class="btn btn-success" />
                                 }
                             }
-                           </td>
+                            
+                        </td>
+                    }
                     </tr>
                 }
             </tbody>

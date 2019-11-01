@@ -17,6 +17,8 @@ namespace Domain.Models
         public string FinishStation { get; set; }
         public TimeSpan TravelTime { get; set; }
 
+        public bool IsRemoved { get; set; }
+
         public List<Station> Stations { get; set; }
 
         public RouteViewModel()

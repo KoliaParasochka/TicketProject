@@ -51,7 +51,7 @@ namespace TicketProject.Controllers
         /// <param name="id">route id</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult ShowRoute(int id)
+        public ActionResult ShowRoute(int? id)
         {
             RouteInfo route = routeService.GetRoute(id);
             return View(route);

@@ -4,7 +4,7 @@
     ViewBag.Title = "Администратор";
 }
 
-<div class="mt-2 container">
+<div class="mt-2 mb-2 container">
     @if (Model.Any())
     {
         <h3 class="h-pos">Список покупателей</h3>
@@ -45,12 +45,13 @@
                     <th>Время отъезда</th>
                     <th>Время прибытия</th>
                     <th>Время в пути</th>
-                    <th></th>
+                    <th class="width"></thclass="width">
                 </tr>
             </thead>
             <tbody>
                 @foreach (var el in ViewBag.Routes)
                 {
+                    
                 <tr>
                     <td>@el.TrainNumber</td>
                     <td>@el.StartStation</td>
@@ -58,7 +59,25 @@
                     <td>@el.StartDate</td>
                     <td>@el.FinishDate</td>
                     <td>@el.TravelTime</td>
-                    <td><a href="/Admin/Change/@el.Id" class="btn btn-info">Изменить</a></td>
+                    <td class="width">
+                        @if (!el.IsRemoved)
+                        {
+                            using (Html.BeginForm("DeleteRoute", "Admin", FormMethod.Get, new { @class = "form-t" }))
+                            {
+                                <input type="hidden" value="@el.Id" name="id" />
+                                <input type="submit" value="Удалить" class="btn btn-link" />
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("RestoreRoute", "Admin", FormMethod.Get, new { @class = "form-t" }))
+                            {
+                                <input type="hidden" value="@el.Id" name="id" />
+                                <input type="submit" value="Восстановить" class="btn btn-link" />
+                            }
+                        }
+                        <a href="/Admin/Change/@el.Id" class="btn btn-link">Изменить</a>
+                    </td>
                 </tr>
                 }
             </tbody>

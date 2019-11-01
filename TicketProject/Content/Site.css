@@ -152,6 +152,10 @@ footer {
     margin-left: 10px;
 }
 
+.width {
+    width: 300px;
+}
+
 @media(min-width: 768px) {
     .panel-search form {
         float: right;

@@ -10,6 +10,6 @@ namespace Domain.Interfaces
 {
     public interface IRouteFactory
     {
-         RouteInfo GetRoute(int id);
+         RouteInfo GetRoute(int? id);
     }
 }

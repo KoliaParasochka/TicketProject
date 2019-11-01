@@ -37,6 +37,24 @@ namespace TicketProject.Controllers
             return View(Tickets);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> DeleteRoute(int id)
+        {
+            Route route = await repository.Routes.GetAsync(id);
+            route.IsRemoved = true;
+            await repository.Routes.UpdateAsync(route);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> RestoreRoute(int id)
+        {
+            Route route = await repository.Routes.GetAsync(id);
+            route.IsRemoved = false;
+            await repository.Routes.UpdateAsync(route);
+            return RedirectToAction("Index");
+        }
+
         /// <summary>
         /// Changing route
         /// </summary>
@@ -118,6 +136,9 @@ namespace TicketProject.Controllers
             if (ModelState.IsValid)
             {
                 await repository.Stations.CreateAsync(model);
+                Route route = repository.Routes.Find(r => r.Stations, r => r.Id == idR).FirstOrDefault();
+                route.Stations.Sort();
+                await repository.Routes.UpdateAsync(route);
                 return RedirectToAction("Change", new { id = idR });
             }
             return View(model);
